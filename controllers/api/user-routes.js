@@ -20,7 +20,26 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    // TODO: include other models when their routes are created
+    include: [
+      {
+        model: Post,
+        attributes: ['id', 'title', 'post_url', 'created_at']
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'content_text', 'created_at'],
+        include: {
+          model: Post,
+          attributes: ['title']
+        }
+      },
+      {
+        model: Post,
+        attributes: ['title'],
+        through: Vote,
+        as: 'voted_posts'
+      }
+    ]
   })
   .then(userData => {
     if (!userData) {
