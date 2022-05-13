@@ -27,13 +27,14 @@ Post.findAll({
     }
   ]
 })
-  .then(dbPostData => res.json(dbPostData))
+  .then(postData => res.json(postData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
   });
 });
 
+// GET user post by id
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -61,13 +62,27 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
-    .then(dbPostData => {
-      if (!dbPostData) {
+    .then(postData => {
+      if (!postData) {
         res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(dbPostData);
+      res.json(postData);
     })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// create a post
+router.post('/', (req, res) => {
+  Post.create({
+    title: req.body.title,
+    post_url: req.body.post_url,
+    user_id: req.session.user_id
+  })
+    .then(postData => res.json(postData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
