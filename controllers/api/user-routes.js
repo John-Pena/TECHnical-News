@@ -62,7 +62,13 @@ router.post('/', (req, res) => {
     password: req.body.password
   })
   .then(userData => {
-    res.json(userData);
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.username = userData.username;
+      req.session.loggedIn = true;
+
+      res.json(userData);
+    });
   })
   .catch(err => {
     console.log(err);
