@@ -11,7 +11,7 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true
     },
-    content_text: {
+    comment_text: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
