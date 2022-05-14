@@ -1,6 +1,5 @@
 // express/sql
 const express = require('express');
-const routes = require('./controllers');
 const sequelize = require('./config/connection');
 
 // sessions
@@ -44,7 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // link routes
-app.use(routes);
+app.use(require('./controllers/'));
 
 // connect to database and start the server
 sequelize.sync({ force: false }).then(() => {
