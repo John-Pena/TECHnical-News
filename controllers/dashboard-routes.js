@@ -5,6 +5,7 @@ const withAuth = require('../utils/auth');
 
 // Gets the main page for user when logged in
 router.get('/', withAuth, (req, res) => {
+  console.log(req.session)
   Post.findAll({
     where: {
       // use the ID from the session
