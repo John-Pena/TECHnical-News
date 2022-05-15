@@ -31,7 +31,8 @@ const sess = {
 app.use(session(sess));
 
 // create handlebars object
-const hbs = exphbs.create({});
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ helpers });
 
 // set handle bars as the default template engine
 app.engine('handlebars', hbs.engine);
