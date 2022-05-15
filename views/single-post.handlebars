@@ -13,18 +13,7 @@
 </form>
 {{/if}}
 
-<div class="">
-  {{#each post.comments}}
-  <section class="">
-    <div class="">
-      {{user.username}} on {{created_at}}
-    </div>
-    <div class="">
-      {{comment_text}}
-    </div>
-  </section>
-  {{/each}}
-</div>
+{{> comments post.comments}}
 
 {{#if loggedIn}}
 <script src="/javascript/comment.js"></script>
